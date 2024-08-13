@@ -1,6 +1,6 @@
 import Hotel from '../model/hotel.js';
 
-//Function create Hotel
+// Function create Hotel
 const criarHotel = async (req, res) =>{
     try {
         const hotel = await Hotel.create(req.body);
@@ -10,20 +10,20 @@ const criarHotel = async (req, res) =>{
     }
 };
 
-//Function get all Hotels
-const listarHotels = async (req, res) => {
+// Function get all Hotels
+const listarHotel = async (req, res) => {
     try {
-        const hotels = await Hotel.findAll();
-        res.json(hotels);
+        const hotel = await Hotel.findAll();
+        res.json(hotel);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 };
 
-//Function get Hotel by CNPJ
+// Function get Hotel by CNPJ
 const buscarHotelPorCNPJ = async (req, res) => {
     try {
-        const hotel = await Hotel.findByPk(req.params.cnpj);
+        const hotel = await Hotel.findOne({ where: { cnpj: req.params.cnpj } });;
         if (!hotel) return res.status(404).json({ error: 'Hotel não encontrado' });
         res.json(hotel);
     } catch (error) {
@@ -31,7 +31,7 @@ const buscarHotelPorCNPJ = async (req, res) => {
     }
 };
 
-//Function update Hotel by CNPJ
+// Function update Hotel by CNPJ
 const atualizarHotelPorCNPJ = async (req, res) => {
     try {
         const hotel = await Hotel.findByPk(req.params.cnpj);
@@ -43,7 +43,7 @@ const atualizarHotelPorCNPJ = async (req, res) => {
     }
 };
 
-//Function delete Hotel by CNPJ
+// Function delete Hotel by CNPJ
 const deletarHotelPorCNPJ = async (req, res) => {
     try {
         const hotel = await Hotel.findByPk(req.params.cnpj);
@@ -55,4 +55,5 @@ const deletarHotelPorCNPJ = async (req, res) => {
     }
 };
 
-module.exports = { criarHotel, listarHotels, buscarHotelPorCNPJ, atualizarHotelPorCNPJ, deletarHotelPorCNPJ };
+// Exporta as funções
+export { criarHotel, listarHotel, buscarHotelPorCNPJ, atualizarHotelPorCNPJ, deletarHotelPorCNPJ };

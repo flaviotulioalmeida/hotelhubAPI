@@ -4,8 +4,7 @@ import { DataTypes } from 'sequelize';
 const sequelize = Sequelize; 
 
 const Hotel = sequelize.define('Hotel', {
-   // Model attributes are defined here
-   nome: {
+  nome: {
      type: DataTypes.STRING,
      allowNull: false,
    },
